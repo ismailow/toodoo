@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+body{
+    background: #ccc;
+    font-family: Roboto;
+    color: #333;
+}
+
+.wrapper{
+    width: 420px;
+    height: 100vh;
+    margin: 0 auto;
+    background-color: #FFF;
+}
+
+.header__inner{
+    padding-top: 10px;
+}
+
+.header__title{
+    color: rgb(26, 72, 221);
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.nav{
+    margin-top: 10px;
+}
+
+.menu{
+    display: flex;
+    justify-content: space-around;
+}
+
+.menu__item{
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.menu__item:hover, .menu__item.active{
+    background-color: #eee;
+    border-bottom: 2px solid rgb(26, 72, 221);
+}
+
+.task{
+    padding: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.task__text{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.task__controls{
+    margin-top: 10px;
+}
+
+.task__btn{
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.task__icon{
+    width: 16px;
+    height: 16px;
+}
