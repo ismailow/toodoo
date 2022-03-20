@@ -50,34 +50,26 @@
     </div>
 </header>
 
-<div class="screen" data-type="tasks"></div>
-    <div class="task">
-        <div class="task__text">
-            <div class="task__description">Сверстать интерфейс</div>
+<div class="screen tasks"></div>
+    
+<div class="screen important"></div>
 
-            <div class="task__control">
-                <input type="checkbox">
+<div class="screen complited"></div>
+
+    <button class="add-task">+</button>
+
+    <div class="modal _hide">
+        <div class="modal-body">
+            <input type="text" class="modal-input">
+            <div class="modal-btns">
+                <button class="modal-button modal-add">Добавить</button>
+                <button class="modal-button close-modal">Закрыть</button>
             </div>
-        </div>
-        
-        <div class="task__controls">
-            <button class="task__btn" id="impotant">
-                <svg class="task__icon">
-                    <use xlink:href="#important"></use>
-                </svg>
-            </button>
-            <button class="task__btn" id="delete">
-                <svg class="task__icon">
-                    <use xlink:href="#delete"></use>
-                </svg>
-            </button>
         </div>
     </div>
 </div>
 
-<div class="screen" data-type="important"></div>
 
-<div class="screen" data-type="completed"></div>
 
 <script src="./script/main.js"></script>
 </body>
