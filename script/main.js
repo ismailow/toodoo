@@ -1,4 +1,5 @@
 const modal = document.querySelector('.modal');
+const modalInput = document.querySelector('.modal-input');
 
 const openModal = function() {
     const openModal = document.querySelector('.add-task');
@@ -10,13 +11,13 @@ const openModal = function() {
 
     closeModal.addEventListener('click', () => {
         modal.classList.add('_hide');
+        modalInput.value = ' ';
     });
 };
 
 const addTask = function(){
     const tasks = document.querySelector('.tasks');
     const modalAdd = document.querySelector('.modal-add');
-    const modalInput = document.querySelector('.modal-input');
 
     modalAdd.addEventListener('click', () => {
         let task = document.createElement('div');
@@ -41,16 +42,42 @@ const addTask = function(){
                             <use xlink:href="#delete"></use>
                         </svg>
                     </button>
-            </div>`
+            </div>`;
         
         tasks.appendChild(task);
         modal.classList.add('_hide');
-    })
-}
+        modalInput.value = '';
+    });
+};
+
+const toggleTabs = function() {
+    const btns = document.querySelectorAll('.menu__item');
+    const screens = document.querySelectorAll('.screen');
+
+    btns.forEach((item) => {
+        item.addEventListener('click', () => {
+            let currentBtn = item;
+            let tab = currentBtn.getAttribute('data-type');
+            let currentTab = document.querySelector(tab);
+
+            btns.forEach((item) => {
+                item.classList.remove('active');
+            });
+
+            screens.forEach((item) => {
+                item.classList.add('_hide');
+            });
+
+            currentBtn.classList.add('active');
+            currentTab.classList.remove('_hide');
+        });
+    });
+};
 
 const app = function() {
     openModal();
     addTask();
+    toggleTabs();
 }
 
 app();

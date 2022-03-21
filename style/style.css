@@ -10,6 +10,7 @@ body{
     background: #ccc;
     font-family: Roboto;
     color: #333;
+    overflow: hidden;
 }
 
 ._hide{
@@ -101,6 +102,29 @@ body{
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+}
+
+.empty{
+    margin-top: 100px;
+    width: 100%;
+}
+
+.empty-icon{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    fill: rgb(26, 72, 221);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+}
+
+.empty-text{
+    text-align: center;
 }
 
 .modal{
