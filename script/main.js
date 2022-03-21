@@ -1,5 +1,6 @@
 const modal = document.querySelector('.modal');
 const modalInput = document.querySelector('.modal-input');
+const screens = document.querySelectorAll('.screen');
 
 const openModal = function() {
     const openModal = document.querySelector('.add-task');
@@ -52,7 +53,6 @@ const addTask = function(){
 
 const toggleTabs = function() {
     const btns = document.querySelectorAll('.menu__item');
-    const screens = document.querySelectorAll('.screen');
 
     btns.forEach((item) => {
         item.addEventListener('click', () => {
@@ -74,10 +74,29 @@ const toggleTabs = function() {
     });
 };
 
+const isEmpty = function() {
+    screens.forEach((item) => {
+        let tasks = item.querySelectorAll('.task');
+
+
+        if(tasks.length === 0){
+            item.innerHTML = `
+                <div class="empty">
+                    <svg class="empty-icon">
+                        <use xlink:href="#folder"></use>
+                    </svg>
+                    <p class="empty-text">Пусто</p>
+                </div>
+            `
+        }
+    })
+}
+
 const app = function() {
     openModal();
     addTask();
     toggleTabs();
+    isEmpty();
 }
 
 app();
