@@ -76,19 +76,25 @@ const toggleTabs = function() {
 
 const isEmpty = function() {
     screens.forEach((item) => {
-        let tasks = item.querySelectorAll('.task');
+        let tasksList = item.children;
+        let empty = document.createElement('div');
+        empty.innerHTML = `
+            <div class="empty">
+                <svg class="empty-icon">
+                    <use xlink:href="#folder"></use>
+                </svg>
+                <p class="empty-text">Пусто</p>
+            </div>
+        `
 
 
-        if(tasks.length === 0){
-            item.innerHTML = `
-                <div class="empty">
-                    <svg class="empty-icon">
-                        <use xlink:href="#folder"></use>
-                    </svg>
-                    <p class="empty-text">Пусто</p>
-                </div>
-            `
+        if(tasksList.length === 0){
+            item.appendChild(empty);
         }
+
+        item.addEventListener('DOMNodeInserted', () => {
+            item.removeChild(empty);
+        })
     })
 }
 
