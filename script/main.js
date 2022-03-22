@@ -33,12 +33,12 @@ const addTask = function(){
                 </div>
 
                 <div class="task__controls">
-                    <button class="task__btn" id="impotant">
+                    <button class="task__btn" class="impotant">
                         <svg class="task__icon">
                             <use xlink:href="#important"></use>
                         </svg>
                     </button>
-                    <button class="task__btn" id="delete">
+                    <button class="task__btn delete">
                         <svg class="task__icon">
                             <use xlink:href="#delete"></use>
                         </svg>
@@ -85,24 +85,41 @@ const isEmpty = function() {
                 </svg>
                 <p class="empty-text">Пусто</p>
             </div>
-        `
-
+        `;
 
         if(tasksList.length === 0){
             item.appendChild(empty);
-        }
+        };
 
         item.addEventListener('DOMNodeInserted', () => {
             item.removeChild(empty);
-        })
-    })
-}
+        });
+    });
+};
+
+const deleteTask = function(){
+    const tasks = document.querySelector('.tasks');
+    let tasksList;
+    
+    tasks.addEventListener('DOMNodeInserted', () => {
+        tasksList = tasks.querySelectorAll('.task');
+
+        tasksList.forEach((item) => {
+            const deleteBtn = item.querySelector('.delete');
+
+            deleteBtn.addEventListener('click', () => {
+                item.remove();
+            });
+        });
+    }); 
+};
 
 const app = function() {
     openModal();
     addTask();
     toggleTabs();
     isEmpty();
+    deleteTask();
 }
 
 app();
