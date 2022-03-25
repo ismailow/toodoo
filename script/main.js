@@ -28,7 +28,7 @@ const addTask = function(){
                 <div class="task__description">${modalInput.value}</div>
 
                 <div class="task__control">
-                    <input type="checkbox">
+                    <input class="completed" type="checkbox">
                 </div>
             </div>
 
@@ -162,6 +162,42 @@ const toImportant = function(){
     });
 };
 
+const toComplited = function() {
+    const completedScreen = document.querySelector('.completed-screen');
+    
+    screens.forEach((item) => {
+        const screen = item;
+        
+        screen.addEventListener('DOMNodeInserted', () => {
+            let tasksList = screen.querySelectorAll('.task');
+
+            tasksList.forEach((item) => {
+                const task = item;
+                const complitedBtn = task.querySelector('.completed');
+
+                complitedBtn.addEventListener('click', () => {
+                    console.log('check');
+                    completedScreen.appendChild(task);
+                });
+            });
+        });
+    });
+
+    completedScreen.addEventListener('DOMNodeInserted', () => {
+        const tasksScreen = document.querySelector('.tasks');
+        let tasksList = completedScreen.querySelectorAll('.task');
+
+        tasksList.forEach((item) => {
+            const task = item;
+            const completedBtn = task.querySelector('.completed');
+
+            completedBtn.addEventListener('click', () => {
+                tasksScreen.appendChild(task);
+            });
+        });
+    });
+};
+
 const app = function() {
     openModal();
     addTask();
@@ -169,6 +205,7 @@ const app = function() {
     isEmpty();
     deleteTask();
     toImportant();
+    toComplited();
 }
 
 app();
