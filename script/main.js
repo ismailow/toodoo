@@ -33,7 +33,7 @@ const addTask = function(){
             </div>
 
             <div class="task__controls">
-                <button class="task__btn" class="impotant">
+                <button class="task__btn important">
                     <svg class="task__icon">
                         <use xlink:href="#important"></use>
                     </svg>
@@ -90,15 +90,10 @@ const isEmpty = function() {
             item.appendChild(empty);
         };
 
+        
         item.addEventListener('DOMNodeInserted', () => {
             item.removeChild(empty);
         });
-
-        // item.addEventListener('DOMNodeRemoved', (event) => {
-        //     if(tasksList.length === 0){
-        //         console.log(tasksList.length);
-        //     };
-        // });
     });
 };
 
@@ -122,6 +117,7 @@ const deleteTask = function(){
                 deleteBtn.addEventListener('click', () => {
                     item.remove();
                     modalDelete.classList.add('_hide');
+                    isEmpty();
                 });
 
                 cancelBtn.addEventListener('click', () => {
@@ -132,12 +128,47 @@ const deleteTask = function(){
     }); 
 };
 
+const toImportant = function(){
+    const importantScreen = document.querySelector('.important-screen');
+    screens.forEach((item) => {
+        const screen = item;
+        
+        screen.addEventListener('DOMNodeInserted', () => {
+            let tasksList = screen.querySelectorAll('.task');
+
+            tasksList.forEach((item) => {
+                const task = item;
+                const importantBtn = task.querySelector('.important');
+
+                importantBtn.addEventListener('click', () => {
+                    importantScreen.appendChild(task);
+                });
+            });
+        });
+    });
+
+    importantScreen.addEventListener('DOMNodeInserted', () => {
+        const tasksScreen = document.querySelector('.tasks');
+        let tasksList = importantScreen.querySelectorAll('.task');
+
+        tasksList.forEach((item) => {
+            const task = item;
+            const importantBtn = task.querySelector('.important');
+
+            importantBtn.addEventListener('click', () => {
+                tasksScreen.appendChild(task);
+            });
+        });
+    });
+};
+
 const app = function() {
     openModal();
     addTask();
     toggleTabs();
     isEmpty();
     deleteTask();
+    toImportant();
 }
 
 app();
