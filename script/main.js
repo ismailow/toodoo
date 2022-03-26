@@ -2,6 +2,49 @@ const modal = document.querySelector('.modal');
 const modalInput = document.querySelector('.modal-input');
 const screens = document.querySelectorAll('.screen');
 
+const emptyMessage = function() {
+    screens.forEach((item) => {
+        const empty = document.createElement('div');
+        empty.classList.add('empty');
+        empty.innerHTML = `
+            <svg class="empty-icon">
+                <use xlink:href="#folder"></use>
+            </svg>
+            <p class="empty-text">Пусто</p>
+        `;
+
+        item.appendChild(empty);
+    });
+};
+
+const isEmptyTest = function() {
+    screens.forEach((item) => {
+        item.addEventListener('DOMSubtreeModified', () => {
+            const tasks = item.querySelectorAll('.task');
+            const emptyMessage = item.querySelector('.empty');
+
+            if(emptyMessage){
+                if(tasks.length > 0){
+                    item.removeChild(emptyMessage);
+                }
+            } else {
+                if(tasks.length === 0){
+                    const empty = document.createElement('div');
+                    empty.classList.add('empty');
+                    empty.innerHTML = `
+                        <svg class="empty-icon">
+                            <use xlink:href="#folder"></use>
+                        </svg>
+                        <p class="empty-text">Пусто</p>
+                    `;
+
+                    item.appendChild(empty);
+                }
+            }
+        })
+    });
+};
+
 const openModal = function() {
     const openModal = document.querySelector('.add-task');
     const closeModal = document.querySelector('.close-modal');
@@ -73,30 +116,6 @@ const toggleTabs = function() {
     });
 };
 
-const isEmpty = function() {
-    screens.forEach((item) => {
-        let tasksList = item.querySelectorAll('.task');
-        let empty = document.createElement('div');
-        empty.innerHTML = `
-            <div class="empty">
-                <svg class="empty-icon">
-                    <use xlink:href="#folder"></use>
-                </svg>
-                <p class="empty-text">Пусто</p>
-            </div>
-        `;
-
-        if(tasksList.length === 0){
-            item.appendChild(empty);
-        };
-
-        
-        item.addEventListener('DOMNodeInserted', () => {
-            item.removeChild(empty);
-        });
-    });
-};
-
 const deleteTask = function(){
     const tasks = document.querySelector('.tasks');
     const modalDelete = document.querySelector('._delete');
@@ -117,7 +136,7 @@ const deleteTask = function(){
                 deleteBtn.addEventListener('click', () => {
                     item.remove();
                     modalDelete.classList.add('_hide');
-                    isEmpty();
+                    //isEmpty();
                 });
 
                 cancelBtn.addEventListener('click', () => {
@@ -125,7 +144,7 @@ const deleteTask = function(){
                 });
             });
         });
-    }); 
+    });
 };
 
 const toImportant = function(){
@@ -176,7 +195,6 @@ const toComplited = function() {
                 const complitedBtn = task.querySelector('.completed');
 
                 complitedBtn.addEventListener('click', () => {
-                    console.log('check');
                     completedScreen.appendChild(task);
                 });
             });
@@ -190,19 +208,25 @@ const toComplited = function() {
         tasksList.forEach((item) => {
             const task = item;
             const completedBtn = task.querySelector('.completed');
+            const importantBtn = task.querySelector('.important');
 
             completedBtn.addEventListener('click', () => {
                 tasksScreen.appendChild(task);
+            });
+
+            importantBtn.addEventListener('click', () => {
+                completedBtn.checked = false;
             });
         });
     });
 };
 
 const app = function() {
+    emptyMessage();
     openModal();
     addTask();
     toggleTabs();
-    isEmpty();
+    isEmptyTest();
     deleteTask();
     toImportant();
     toComplited();
